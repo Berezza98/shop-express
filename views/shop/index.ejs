@@ -1,0 +1,15 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/products.css">
+</head>
+<body>
+  <%- include('../includes/header.ejs') %>
+  <div class="products">
+    <% items.forEach(item => { %>
+      <a class="product" href="/product/<%= item.id %>">
+        <div>
+          <p><%= item.name %></p>
+        </div>
+      </a>
+    <% }) %>
+  </div>
+  <%- include('../includes/end.ejs') %>

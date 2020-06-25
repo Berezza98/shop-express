@@ -1,0 +1,13 @@
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.product {
+  flex-basis: 300px;
+  height: 100px;
+  background: gray;
+  border: 2px solid green;
+  margin-bottom: 10px;
+}
