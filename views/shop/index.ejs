@@ -4,10 +4,10 @@
 <body>
   <%- include('../includes/header.ejs') %>
   <div class="products">
-    <% items.forEach(item => { %>
+    <% products.forEach(item => { %>
       <a class="product" href="/product/<%= item.id %>">
         <div>
-          <p><%= item.name %></p>
+          <p><%= item.title %></p>
         </div>
       </a>
     <% }) %>

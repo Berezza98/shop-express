@@ -1,35 +1,38 @@
-const { promisify } = require('util');
-const fs = require('fs');
-const path = require('path');
-
-const { rootDir } = require('../utils/path');
-
-const readFileAsync = promisify(fs.readFile);
-const writeFileAsync = promisify(fs.writeFile);
-
-const modelPath = path.join(rootDir, 'data', 'products.json')
+const db = require('../utils/db');
 
 class Product {
-  constructor(name) {
-    this.name = name;
-    this.id = Math.random().toFixed(16).toString();
+  constructor(title, price, description, imageUrl) {
+    this.title = title;
+    this.price = price;
+    this.description = description;
+    this.imageUrl = imageUrl;
   }
 
-  static async save(product) {
-    const currentProducts = await Product.fetchAllProducts();
-    currentProducts.push(product);
-    await writeFileAsync(modelPath, JSON.stringify(currentProducts));
+  save() {
+    const { title, price, description, imageUrl } = this;
+    return db.execute(
+      'INSERT INTO products (title, price, description, imageUrl) VALUES (?, ?, ?, ?)',
+      [title, price, description, imageUrl]);
   }
 
   static async fetchAllProducts() {
-    let products = [];
     try {
-      const data = await readFileAsync(modelPath);
-      products = JSON.parse(data);
+      const data = await db.execute('SELECT * FROM products');
+      return data;
     } catch(e) {
       console.log(e);
+      return null;
     }
-    return products;
+  }
+
+  static async findById(id) {
+    try {
+      const [products, rows] = await db.execute('SELECT * FROM products WHERE products.id = ?', [id]);
+      return [products[0], rows];
+    } catch(e) {
+      console.log(e);
+      return null;
+    }
   }
 }
 

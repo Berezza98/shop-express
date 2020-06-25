@@ -1,10 +1,19 @@
 <%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
   <%- include('../includes/header.ejs') %>
-  <p>Admin Page</p>
-  <form action="/admin/add-product" method="POST">
-    <input type="text" name="title">
-    <input type="submit" value="create">
-  </form>
+  <div class="create-product">
+    <form action="/admin/add-product" method="POST">
+      <label>Title: </label>
+      <input type="text" name="title">
+      <label>Price: </label>
+      <input type="text" name="price">
+      <label>Decription: </label>
+      <input type="text" name="description">
+      <label>Image: </label>
+      <input type="text" name="imageUrl">
+      <input type="submit" value="create">
+    </form>
+  </div>
 <%- include('../includes/end.ejs') %>
