@@ -2,12 +2,24 @@
 <link rel="stylesheet" href="/css/products.css">
 </head>
 <body>
-  <%- include('../includes/header.ejs') %>
+  <%- include( edit ? '../admin/includes/header.ejs' : './includes/header.ejs') %>
   <div class="products">
     <% products.forEach(item => { %>
       <a class="product" href="/product/<%= item.id %>">
         <div>
-          <p><%= item.title %></p>
+          <p>Name: <%= item.title %></p>
+          <p>Price: <%= item.price %></p>
+          <p>Description: <%= item.description %></p>
+          <p>Image: <%= item.imageUrl %></p>
+          <% if(edit) { %>
+          <form method="GET" action="<%= `admin/product/edit/${item.id}` %>">
+            <input type="submit" value="Edit">
+          </form >
+          <form method="POST" action="admin/product/delete">
+            <input type="hidden" name="id" value="<%= item.id %>">
+            <input type="submit" value="Delete">
+          </form >
+          <% } %>
         </div>
       </a>
     <% }) %>

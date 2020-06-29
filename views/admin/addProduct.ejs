@@ -2,18 +2,21 @@
 <link rel="stylesheet" href="/css/admin.css">
 </head>
 <body>
-  <%- include('../includes/header.ejs') %>
+  <%- include('./includes/header.ejs') %>
   <div class="create-product">
-    <form action="/admin/add-product" method="POST">
+    <form action="<%= edit ? '/admin/product/edit' : '/admin/add-product' %>" method="POST">
       <label>Title: </label>
-      <input type="text" name="title">
+      <input type="text" name="title" value="<%- edit ? title : '' %>">
       <label>Price: </label>
-      <input type="text" name="price">
+      <input type="text" name="price" value="<%- edit ? price : '' %>">
       <label>Decription: </label>
-      <input type="text" name="description">
+      <input type="text" name="description" value="<%- edit ? description : '' %>">
       <label>Image: </label>
-      <input type="text" name="imageUrl">
-      <input type="submit" value="create">
+      <input type="text" name="imageUrl" value="<%- edit ? imageUrl : '' %>">
+      <% if(edit) { %>
+      <input type="hidden" name="id" value="<%= id %>">
+      <% } %>
+      <input type="submit" value="<%= edit ? 'edit' : 'create' %>">
     </form>
   </div>
 <%- include('../includes/end.ejs') %>
