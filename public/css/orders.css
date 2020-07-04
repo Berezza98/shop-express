@@ -1,0 +1,12 @@
+.order {
+  width: 100%;
+  min-height: 150px;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: lightblue;
+  border: 1px solid blue;
+}
+
+.order-item {
+  margin-bottom: 10px;
+}

@@ -3,12 +3,7 @@ const Product = require('../models/Product');
 const createProduct = async (req, res) => {
   const { title, price, description, imageUrl } = req.body;
   try {
-    await req.user.createProduct({
-      title,
-      price,
-      description,
-      imageUrl
-    });
+    await new Product(title, price, description, imageUrl, null, req.user._id).save();
   } catch(e) {
     console.log(e);
   }
@@ -16,7 +11,7 @@ const createProduct = async (req, res) => {
 };
 
 const getAllProducts = async (req, res) => {
-  const products = await req.user.getProducts();
+  const products = await Product.fetchAll();
   res.render('shop/index', {
     pageTitle: 'Add Product',
     edit: true,
@@ -33,26 +28,24 @@ const getAddProduct = (req, res) => {
 
 const getEditProduct = async (req, res) => {
   const id = req.params.id;
-  const [neededProduct] = await req.user.getProducts({ where: { id } });
+  const neededProduct = await Product.findById(id);
 
   res.render('admin/addProduct', {
     pageTitle: 'Edit Product',
     edit: true,
-    ...neededProduct.dataValues
+    ...neededProduct
   });
 };
 
 const editProduct = async (req, res) => {
-  const { id } = req.body;
-  const neededProduct = await Product.findByPk(id);
-  await Object.assign(neededProduct, req.body).save();
+  const { title, price, description, imageUrl, id } = req.body;
+  await new Product(title, price, description, imageUrl, id).save();
   res.redirect('/admin');
 };
 
 const deleteProduct = async (req, res) => {
   const { id } = req.body;
-  const neededProduct = await Product.findByPk(id);
-  await neededProduct.destroy();
+  await Product.deleteById(id);
   res.redirect('/admin');
 };
 

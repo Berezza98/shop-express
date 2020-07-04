@@ -5,20 +5,25 @@
   <%- include( edit ? '../admin/includes/header.ejs' : './includes/header.ejs') %>
   <div class="products">
     <% products.forEach(item => { %>
-      <a class="product" href="/product/<%= item.id %>">
+      <a class="product" href="/product/<%= item._id %>">
         <div>
           <p>Name: <%= item.title %></p>
           <p>Price: <%= item.price %></p>
           <p>Description: <%= item.description %></p>
           <p>Image: <%= item.imageUrl %></p>
           <% if(edit) { %>
-          <form method="GET" action="<%= `admin/product/edit/${item.id}` %>">
+          <form method="GET" action="<%= `admin/product/edit/${item._id}` %>">
             <input type="submit" value="Edit">
           </form >
           <form method="POST" action="admin/product/delete">
-            <input type="hidden" name="id" value="<%= item.id %>">
+            <input type="hidden" name="id" value="<%= item._id %>">
             <input type="submit" value="Delete">
           </form >
+          <% } else { %>
+            <form method="POST" action="/addToCart">
+              <input type="hidden" name="id" value="<%= item._id %>">
+              <input type="submit" value="Add to Cart">
+            </form >
           <% } %>
         </div>
       </a>

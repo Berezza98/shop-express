@@ -1,5 +1,26 @@
-const Sequelize = require('sequelize');
+const mongodb = require('mongodb');
 
-const sequelize = new Sequelize('node-complete', 'root', 'Berezza98', { dialect: 'mysql', host: 'localhost' });
+const MongoClient = mongodb.MongoClient;
 
-module.exports = sequelize;
+let _db;
+
+const mongoConnect = async () => {
+  try {
+    const client = await MongoClient.connect('mongodb+srv://roman:Berezza98@cluster0-f6ftl.mongodb.net/shop?retryWrites=true&w=majority');
+    _db = client.db();
+  } catch(e) {
+    throw e;
+  }
+};
+
+const getDb = () => {
+  if (_db) {
+    return _db;
+  }
+  throw 'No BD found!';
+};
+
+module.exports = {
+  mongoConnect,
+  getDb
+};
