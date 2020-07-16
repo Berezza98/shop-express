@@ -3,9 +3,14 @@ header {
   background: lightblue;
   margin-bottom: 10px;
   border-bottom: 2px solid blueviolet;
+  justify-content: space-between;
 }
 
-header > a {
+header .right, header .left {
+  display: flex;
+}
+
+header a {
   padding: 10px;
   display: block;
   height: 100%;

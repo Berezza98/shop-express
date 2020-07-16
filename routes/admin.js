@@ -1,4 +1,6 @@
-const express = require('express');
+const { Router } = require('express');
+
+const isAuth = require('../middlewares/isAuth');
 
 const {
   getAddProduct,
@@ -9,14 +11,14 @@ const {
   deleteProduct
 } = require('../controllers/admin');
 
-const router = express.Router();
+const router = Router();
 
-router.get('/', getAllProducts);
-router.get('/add-product', getAddProduct);
-router.get('/product/edit/:id', getEditProduct);
+router.get('/', isAuth, getAllProducts);
+router.get('/add-product', isAuth, getAddProduct);
+router.get('/product/edit/:id', isAuth, getEditProduct);
 
-router.post('/add-product', createProduct);
-router.post('/product/edit', editProduct);
-router.post('/product/delete', deleteProduct);
+router.post('/add-product', isAuth, createProduct);
+router.post('/product/edit', isAuth, editProduct);
+router.post('/product/delete', isAuth, deleteProduct);
 
 module.exports = router;
