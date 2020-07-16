@@ -1,6 +1,19 @@
 <header>
-  <a href="/">Shop</a>
-  <a href="/cart">Cart</a>
-  <a href="/orders">Orders</a>
-  <a href="/admin">Admin</a>
+  <div class="left">
+    <a href="/">Shop</a>
+    <% if (loggedIn) { %>
+    <a href="/cart">Cart</a>
+    <a href="/orders">Orders</a>
+    <a href="/admin">Admin</a>
+  </div>
+  <div class="right">
+    <a href="/logout">Log Out</a>
+  </div>
+    <% } else { %>
+  </div>
+  <div class="right">
+    <a href="/login">Log In</a>
+    <a href="/signUp">Sign Up</a>
+  </div>
+    <% } %>
 </header>

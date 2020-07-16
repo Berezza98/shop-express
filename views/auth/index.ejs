@@ -1,0 +1,25 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/login.css">
+<link rel="stylesheet" href="/css/errors.css">
+</head>
+<body>
+  <%- include('../shop/includes/header.ejs') %>
+  <div class="errors">
+    <% if (error) { %>
+      <span><%= error %></span>
+    <% } %>
+  </div>
+  <div class="login-wrapper">
+    <form action="/login" method="POST">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <label>Email: </label>
+      <input type="text" name="email">
+      <label>Password: </label>
+      <input type="password" name="password">
+      <input type="submit" value="Log In">
+    </form>
+  </div>
+  <div class="reset">
+    <a href="/reset">Reset Password</a>
+  </div>
+<%- include('../includes/end.ejs') %>

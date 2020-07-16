@@ -6,7 +6,7 @@
   <div class="order-wrapper">
     <% orders.forEach(order => { %>
       <div class="order">
-        <% order.items.forEach(product => { %>
+        <% order.products.forEach(({ product }) => { %>
           <div class="order-item">
             <p>Name: <%= product.title %></p>
             <p>Price: <%= product.price %></p>

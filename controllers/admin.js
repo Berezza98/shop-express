@@ -1,9 +1,8 @@
 const Product = require('../models/Product');
 
 const createProduct = async (req, res) => {
-  const { title, price, description, imageUrl } = req.body;
   try {
-    await new Product(title, price, description, imageUrl, null, req.user._id).save();
+    await new Product({ ...req.body, userId: req.user }).save();
   } catch(e) {
     console.log(e);
   }
@@ -11,7 +10,7 @@ const createProduct = async (req, res) => {
 };
 
 const getAllProducts = async (req, res) => {
-  const products = await Product.fetchAll();
+  const products = await Product.find({ userId: req.user._id });
   res.render('shop/index', {
     pageTitle: 'Add Product',
     edit: true,
@@ -28,24 +27,38 @@ const getAddProduct = (req, res) => {
 
 const getEditProduct = async (req, res) => {
   const id = req.params.id;
-  const neededProduct = await Product.findById(id);
+  const { title, price, description, imageUrl, _id } = await Product.findById(id);
 
   res.render('admin/addProduct', {
     pageTitle: 'Edit Product',
     edit: true,
-    ...neededProduct
+    title,
+    price,
+    description,
+    imageUrl,
+    _id
   });
 };
 
 const editProduct = async (req, res) => {
   const { title, price, description, imageUrl, id } = req.body;
-  await new Product(title, price, description, imageUrl, id).save();
+  const product = await Product.findById(id);
+
+  if (!product.userId.equals(req.user._id)) {
+    return res.redirect('/');
+  }
+
+  product.title = title;
+  product.price = price;
+  product.description = description;
+  product.imageUrl = imageUrl;
+  await product.save();
   res.redirect('/admin');
 };
 
 const deleteProduct = async (req, res) => {
   const { id } = req.body;
-  await Product.deleteById(id);
+  await Product.deleteOne({ _id: id, userId: req.user._id })
   res.redirect('/admin');
 };
 
