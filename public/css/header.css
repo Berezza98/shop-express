@@ -1,4 +1,18 @@
 header {
+  display: flex;
   background: lightblue;
   margin-bottom: 10px;
+  border-bottom: 2px solid blueviolet;
+  justify-content: space-between;
+}
+
+header .right, header .left {
+  display: flex;
+}
+
+header a {
+  padding: 10px;
+  display: block;
+  height: 100%;
+  border-right: 2px solid blueviolet;
 }

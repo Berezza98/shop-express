@@ -2,14 +2,34 @@
 <link rel="stylesheet" href="/css/products.css">
 </head>
 <body>
-  <%- include('../includes/header.ejs') %>
+  <%- include( edit ? '../admin/includes/header.ejs' : './includes/header.ejs') %>
   <div class="products">
     <% products.forEach(item => { %>
-      <a class="product" href="/product/<%= item.id %>">
-        <div>
-          <p><%= item.title %></p>
+      <a class="product" href="/product/<%= item._id %>">
+        <div class="wrapper">
+          <p>Name: <%= item.title %></p>
+          <p>Price: <%= item.price %></p>
+          <p>Description: <%= item.description %></p>
+          <img src="/<%= item.imageUrl %>">
+          <% if(edit) { %>
+          <form method="GET" action="<%= `admin/product/edit/${item._id}` %>">
+            <input type="submit" value="Edit">
+          </form >
+          <form method="POST" action="admin/product/delete">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="id" value="<%= item._id %>">
+            <input type="submit" value="Delete">
+          </form >
+          <% } else if ( !edit && loggedIn ) { %>
+            <form method="POST" action="/addToCart">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+              <input type="hidden" name="id" value="<%= item._id %>">
+              <input type="submit" value="Add to Cart">
+            </form >
+          <% } %>
         </div>
       </a>
     <% }) %>
   </div>
+  <%- include('../includes/pagination.ejs', { currentPage, pagesCount }) %>
   <%- include('../includes/end.ejs') %>

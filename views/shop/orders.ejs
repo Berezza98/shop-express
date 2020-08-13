@@ -1,0 +1,20 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/orders.css">
+</head>
+<body>
+  <%- include('./includes/header.ejs') %>
+  <div class="order-wrapper">
+    <% orders.forEach(order => { %>
+      <div class="order">
+        <% order.products.forEach(({ product }) => { %>
+          <div class="order-item">
+            <p>Name: <%= product.title %></p>
+            <p>Price: <%= product.price %></p>
+            <p>Quantity: <%= product.quantity %></p>
+          </div>
+        <% }) %>
+        <a href="/invoice/<%= order._id %>">Get invoice</a>
+      </div>
+    <% }) %>
+  </div>
+<%- include('../includes/end.ejs') %>

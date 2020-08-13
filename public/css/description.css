@@ -1,11 +1,11 @@
-.card-wrapper {
+.description-wrapper {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.card {
+.description {
   height: 300px;
   width: 200px;
   background: gray;
