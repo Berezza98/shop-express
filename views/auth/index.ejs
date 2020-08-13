@@ -13,7 +13,7 @@
     <form action="/login" method="POST">
       <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       <label>Email: </label>
-      <input type="text" name="email">
+      <input type="text" name="email" value="<%= input.email %>">
       <label>Password: </label>
       <input type="password" name="password">
       <input type="submit" value="Log In">
@@ -21,5 +21,8 @@
   </div>
   <div class="reset">
     <a href="/reset">Reset Password</a>
+    <a href="/login/google">
+      <button>Log In with Google</button>
+    </a>
   </div>
 <%- include('../includes/end.ejs') %>

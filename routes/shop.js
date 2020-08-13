@@ -9,7 +9,8 @@ const {
   getCart,
   deleteCartItem,
   makeOrder,
-  getOrders
+  getOrders,
+  getInvoice
 } = require('../controllers/products');
 
 const router = Router();
@@ -18,6 +19,7 @@ router.get('/', getProducts);
 router.get('/product/:productId', getProduct);
 router.get('/cart', isAuth, getCart);
 router.get('/orders', isAuth, getOrders);
+router.get('/invoice/:orderId', isAuth, getInvoice);
 
 router.post('/addToCart', isAuth, addToCart);
 router.post('/deleteCartItem', isAuth, deleteCartItem);

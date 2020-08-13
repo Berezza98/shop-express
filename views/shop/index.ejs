@@ -6,11 +6,11 @@
   <div class="products">
     <% products.forEach(item => { %>
       <a class="product" href="/product/<%= item._id %>">
-        <div>
+        <div class="wrapper">
           <p>Name: <%= item.title %></p>
           <p>Price: <%= item.price %></p>
           <p>Description: <%= item.description %></p>
-          <p>Image: <%= item.imageUrl %></p>
+          <img src="/<%= item.imageUrl %>">
           <% if(edit) { %>
           <form method="GET" action="<%= `admin/product/edit/${item._id}` %>">
             <input type="submit" value="Edit">
@@ -31,4 +31,5 @@
       </a>
     <% }) %>
   </div>
+  <%- include('../includes/pagination.ejs', { currentPage, pagesCount }) %>
   <%- include('../includes/end.ejs') %>

@@ -1,0 +1,5 @@
+<div class="pagination">
+  <% for(let i = 1; i <= pagesCount; i++){ %>
+    <a class="pagination-item <%= currentPage === i ? 'active' : '' %>" href="?page=<%= i %>"><%= i %></a>
+  <% } %>
+</div>

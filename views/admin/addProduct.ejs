@@ -4,7 +4,7 @@
 <body>
   <%- include('./includes/header.ejs') %>
   <div class="create-product">
-    <form action="<%= edit ? '/admin/product/edit' : '/admin/add-product' %>" method="POST">
+    <form action="<%= edit ? '/admin/product/edit' : '/admin/add-product' %>" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       <label>Title: </label>
       <input type="text" name="title" value="<%- edit ? title : '' %>">
@@ -13,7 +13,7 @@
       <label>Decription: </label>
       <input type="text" name="description" value="<%- edit ? description : '' %>">
       <label>Image: </label>
-      <input type="text" name="imageUrl" value="<%- edit ? imageUrl : '' %>">
+      <input type="file" name="image">
       <% if(edit) { %>
       <input type="hidden" name="id" value="<%= _id %>">
       <% } %>
