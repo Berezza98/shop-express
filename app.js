@@ -8,6 +8,7 @@ const csrf = require('csurf');
 const flash = require('connect-flash');
 const MongoStore = require('connect-mongo')(session);
 const multer = require('multer');
+const morgan = require('morgan');
 
 const passportSetup = require('./utils/passport');
 const { fileFilter, storage : multerStorage } = require('./utils/multer');
@@ -34,6 +35,7 @@ const csrfProtection = csrf();
 app.set('view engine', 'ejs');
 app.set('views', 'views'); // folder with views
 
+app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(multer({ storage: multerStorage, fileFilter }).single('image'));
 app.use(express.static(path.join(__dirname, 'public')));
