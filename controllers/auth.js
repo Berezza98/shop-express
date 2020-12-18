@@ -63,7 +63,7 @@ const getLogout = async (req, res) => {
 
 const getSignUp = async (req, res) => {
   const [error] = req.flash('error');
-  res.render('auth/signUp', {
+  res.render('auth/signup', {
     pageTitle: 'Sign Up',
     loggedIn: false,
     error,
