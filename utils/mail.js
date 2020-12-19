@@ -1,7 +1,4 @@
-const { promisify } = require('util');
 const nodemailer = require("nodemailer");
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.MAIL_API_KEY);
 
 const transporter = nodemailer.createTransport({
   host: "nw68.fcomet.com",
@@ -22,7 +19,6 @@ const signUpEmail = async (email) => {
     html: '<strong>Welcome to My Shop</strong>',
   };
   try {
-    //await sgMail.send(msg);
     await transporter.sendMail(msg);
   } catch(e) {
     console.log(e);
@@ -41,7 +37,6 @@ const resetPswEmail = async (email, token) => {
     `,
   };
   try {
-    //await sgMail.send(msg);
     await transporter.sendMail(msg);
   } catch(e) {
     console.log(e);
