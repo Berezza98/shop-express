@@ -33,7 +33,7 @@ const resetPswEmail = async (email, token) => {
     text: 'You wanna change your password',
     html: `
       <p>Here you can change your password</p>
-      <a href="http://localhost:3300/newPassword?token=${token}">Click here to change your password</a>
+      <a href="http://myapi.date/newPassword?token=${token}">Click here to change your password</a>
     `,
   };
   try {
