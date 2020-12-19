@@ -37,7 +37,8 @@ const resetPswEmail = async (email, token) => {
     `,
   };
   try {
-    await transporter.sendMail(msg);
+    const res = await transporter.sendMail(msg);
+    console.log(res);
   } catch(e) {
     console.log(e);
   }
