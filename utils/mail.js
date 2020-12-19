@@ -13,8 +13,6 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendEmailAsync = promisify(transporter.sendMail);
-
 const signUpEmail = async (email) => {
   const msg = {
     to: email,
@@ -25,7 +23,7 @@ const signUpEmail = async (email) => {
   };
   try {
     //await sgMail.send(msg);
-    await sendEmailAsync(msg);
+    await transporter.sendMail(msg);
   } catch(e) {
     console.log(e);
   }
@@ -44,7 +42,7 @@ const resetPswEmail = async (email, token) => {
   };
   try {
     //await sgMail.send(msg);
-    await sendEmailAsync(msg);
+    await transporter.sendMail(msg);
   } catch(e) {
     console.log(e);
   }
