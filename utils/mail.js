@@ -16,7 +16,7 @@ const transporter = nodemailer.createTransport({
 const signUpEmail = async (email) => {
   const msg = {
     to: email,
-    from: 'berezdecky98@gmail.com',
+    from: 'admin@myapi.date',
     subject: 'Hi, you was successfully registered',
     text: 'Welcome to My Shop',
     html: '<strong>Welcome to My Shop</strong>',
@@ -32,7 +32,7 @@ const signUpEmail = async (email) => {
 const resetPswEmail = async (email, token) => {
   const msg = {
     to: email,
-    from: 'berezdecky98@gmail.com',
+    from: 'admin@myapi.date',
     subject: 'Password changing',
     text: 'You wanna change your password',
     html: `
