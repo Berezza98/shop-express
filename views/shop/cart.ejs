@@ -17,10 +17,11 @@
     </div>
   <% }) %>
   <div class="make-order">
-    <form action="/order" method="POST">
+    <a href="/checkout">Order now</a>
+    <!-- <form action="/order" method="POST">
       <input type="hidden" name="_csrf" value="<%= csrfToken %>">
       <input type="submit" value="Make Order">
-    </form>
+    </form> -->
   </div>
 </div>
 <%- include('../includes/end.ejs') %>
